@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:gfe="http://www.springframework.org/schema/gemfire"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+		http://www.springframework.org/schema/gemfire http://www.springframework.org/schema/gemfire/spring-gemfire.xsd">
+
+	<!-- turn on declarative caching -->
+	<cache:annotation-driven />
+
+	<gfe:client-cache id="booksCache" pool-name="my-pool" />
+
+	<gfe:pool id="my-pool" subscription-enabled="true">
+		<gfe:locator host="localhost" port="1234" />
+	</gfe:pool>
+
+	<gfe:client-region id="books" cache-ref="booksCache" />
+
+	<!-- declare GemFire Cache Manager -->
+	<bean id="cacheManager"
+		class="org.springframework.data.gemfire.support.GemfireCacheManager"
+		p:cache-ref="booksCache" />
+
+
+</beans>
