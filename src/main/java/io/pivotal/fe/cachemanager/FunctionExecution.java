@@ -6,7 +6,7 @@ import org.springframework.data.gemfire.function.annotation.OnServer;
 @OnServer(pool="mypool")
 public interface FunctionExecution {
 
-	@FunctionId("createRegionFunction")
+	@FunctionId("createRegion")
 	boolean createRegion(String cacheName);
 
 }
