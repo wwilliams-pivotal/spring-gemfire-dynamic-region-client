@@ -3,32 +3,49 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.springframework</groupId>
-	<artifactId>gs-caching</artifactId>
+	<groupId>io.pivotal.poc.voya</groupId>
+	<artifactId>gemfire-client-side</artifactId>
 	<version>0.2.0</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.4.RELEASE</version>
+		<version>1.2.5.RELEASE</version>
 	</parent>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>gemfire-repository</id>
+			<name>Gemfire Repository</name>
+			<url>http://dist.gemstone.com/maven/release</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>libs-release</name>
+			<url>http://repo.springsource.org/libs-release</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-gemfire</artifactId>
-			<version>1.6.0.RELEASE</version>
+			<version>1.6.2.RELEASE</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>gemfire</artifactId>
+					<groupId>com.gemstone.gemfire</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>com.gemstone.gemfire</groupId>
 			<artifactId>gemfire</artifactId>
@@ -37,24 +54,6 @@
 
 	</dependencies>
 
-	<repositories>
-
-		<repository>
-			<id>gemfire-repository</id>
-			<name>Gemfire Repository</name>
-			<url>http://dist.gemstone.com/maven/release</url>
-		</repository>
-
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>libs-release</name>
-			<url>http://repo.springsource.org/libs-release</url>
-		</repository>
-
-	</repositories>
 	<build>
 		<plugins>
 			<plugin>
